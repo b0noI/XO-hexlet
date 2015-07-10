@@ -2,9 +2,8 @@ package io.hexlet.xo.controllers;
 
 import io.hexlet.xo.model.Field;
 import io.hexlet.xo.model.Figure;
+import io.hexlet.xo.model.Point;
 import org.junit.Test;
-
-import java.awt.*;
 
 import static org.junit.Assert.*;
 
