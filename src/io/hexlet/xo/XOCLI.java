@@ -7,11 +7,16 @@ import io.hexlet.xo.model.Game;
 import io.hexlet.xo.model.Player;
 import io.hexlet.xo.view.ConsoleView;
 
+import java.util.Scanner;
+
 public class XOCLI {
 
     public static void main(final String[] args) {
-        final String name1 = "Gleb";
-        final String name2 = "Slava";
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Player 1 name: ");
+        final String name1 = sc.nextLine();
+        System.out.print("Enter Player 2 name: ");
+        final String name2 = sc.nextLine();
 
         final Player[] players = new Player[2];
         players[0] = new Player(name1, Figure.X);
