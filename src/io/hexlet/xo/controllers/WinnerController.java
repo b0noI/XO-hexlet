@@ -3,26 +3,25 @@ package io.hexlet.xo.controllers;
 
 import io.hexlet.xo.model.Field;
 import io.hexlet.xo.model.Figure;
+import io.hexlet.xo.model.Point;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
-
-import java.awt.*;
 
 public class WinnerController {
 
     public Figure getWinner(final Field field) {
         try {
             for (int i = 0; i < 3; i++)
-                if (check(field, new Point(i, 0), p -> new Point(p.x, p.y + 1)))
+                if (check(field, new Point(i, 0), p -> new Point(p.getX(), p.getY() + 1)))
                     return field.getFigure(new Point(i, 0));
 
             for (int i = 0; i < 3; i++)
-                if (check(field, new Point(0, i), p -> new Point(p.x + 1, p.y)))
+                if (check(field, new Point(0, i), p -> new Point(p.getX() + 1, p.getY())))
                     return field.getFigure(new Point(0, i));
 
-            if (check(field, new Point(0, 0), p -> new Point(p.x + 1, p.y + 1)))
+            if (check(field, new Point(0, 0), p -> new Point(p.getX() + 1, p.getY() + 1)))
                 return field.getFigure(new Point(0, 0));
 
-            if (check(field, new Point(0, 2), p -> new Point(p.x + 1, p.y - 1)))
+            if (check(field, new Point(0, 2), p -> new Point(p.getX() + 1, p.getY() - 1)))
                 return field.getFigure(new Point(1, 1));
 
         } catch (final InvalidPointException e) {
