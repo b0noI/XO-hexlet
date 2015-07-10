@@ -11,12 +11,10 @@ import java.util.Scanner;
 
 public class XOCLI {
 
+    static int nameCount = 1;
     public static void main(final String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Player 1 name: ");
-        final String name1 = sc.nextLine();
-        System.out.print("Enter Player 2 name: ");
-        final String name2 = sc.nextLine();
+        final String name1 = playerInput();
+        final String name2 = playerInput();
 
         final Player[] players = new Player[2];
         players[0] = new Player(name1, Figure.X);
@@ -31,4 +29,13 @@ public class XOCLI {
         }
     }
 
+    static String playerInput() {
+        Scanner sc = new Scanner(System.in);
+        System.out.format("Enter Player %s  name: ", nameCount);
+        String name = sc.nextLine();
+        nameCount++;
+        return name;
+    }
+
 }
+
