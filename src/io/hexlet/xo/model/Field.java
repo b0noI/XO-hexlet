@@ -3,7 +3,6 @@ package io.hexlet.xo.model;
 
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 
-import java.awt.*;
 
 public class Field {
 
@@ -26,18 +25,18 @@ public class Field {
         if (!checkPoint(point)) {
             throw new InvalidPointException();
         }
-        return field[point.x][point.y];
+        return field[point.getX()][point.getY()];
     }
 
     public void setFigure(final Point point, final Figure figure) throws InvalidPointException {
         if (!checkPoint(point)) {
             throw new InvalidPointException();
         }
-        field[point.x][point.y] = figure;
+        field[point.getX()][point.getY()] = figure;
     }
 
     private boolean checkPoint(final Point point) {
-        return checkCoordinate(point.x, field.length) && checkCoordinate(point.y, field[point.x].length);
+        return checkCoordinate(point.getX(), field.length) && checkCoordinate(point.getY(), field[point.getX()].length);
     }
 
     private boolean checkCoordinate(final int coordinate, final int maxCoordinate) {
