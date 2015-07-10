@@ -10,11 +10,9 @@ import io.hexlet.xo.view.ConsoleView;
 import java.util.Scanner;
 
 public class XOCLI {
-
-    static int nameCount = 1;
     public static void main(final String[] args) {
-        final String name1 = playerInput();
-        final String name2 = playerInput();
+        final String name1 = playerNameInput(1);
+        final String name2 = playerNameInput(2);
 
         final Player[] players = new Player[2];
         players[0] = new Player(name1, Figure.X);
@@ -29,11 +27,10 @@ public class XOCLI {
         }
     }
 
-    static String playerInput() {
+    static String playerNameInput(final int count) {
         Scanner sc = new Scanner(System.in);
-        System.out.format("Enter Player %s  name: ", nameCount);
+        System.out.format("Enter Player %s  name: ", count);
         String name = sc.nextLine();
-        nameCount++;
         return name;
     }
 
