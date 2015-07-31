@@ -4,10 +4,7 @@ package io.hexlet.xo.view;
 import io.hexlet.xo.controllers.CurrentMoveController;
 import io.hexlet.xo.controllers.MoveController;
 import io.hexlet.xo.controllers.WinnerController;
-import io.hexlet.xo.model.Field;
-import io.hexlet.xo.model.Figure;
-import io.hexlet.xo.model.Game;
-import io.hexlet.xo.model.Point;
+import io.hexlet.xo.model.*;
 import io.hexlet.xo.model.exceptions.AlreadyOccupiedException;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 
@@ -24,6 +21,13 @@ public class ConsoleView {
 
     public void show(final Game game) {
         System.out.format("Game name: %s\n", game.getName());
+
+        System.out.println("Players:");
+
+        for (Player player : game) {
+            System.out.format("Player name: %s figure: %s\n", player.getName(), player.getFigure());
+        }
+
         final Field field = game.getField();
         for (int x = 0; x < field.getSize(); x++) {
             if (x != 0)
