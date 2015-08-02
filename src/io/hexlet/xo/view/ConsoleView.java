@@ -10,9 +10,8 @@ import io.hexlet.xo.model.Game;
 import io.hexlet.xo.model.Point;
 import io.hexlet.xo.model.exceptions.AlreadyOccupiedException;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
+import io.hexlet.xo.view.reader.ConsoleCoordinateReader;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class ConsoleView {
 
@@ -21,6 +20,8 @@ public class ConsoleView {
     private final WinnerController winnerController = new WinnerController();
 
     private final MoveController moveController = new MoveController();
+
+    private final ConsoleCoordinateReader coordinateReader = new ConsoleCoordinateReader();
 
     public void show(final Game game) {
         System.out.format("Game name: %s\n", game.getName());
@@ -55,18 +56,7 @@ public class ConsoleView {
     }
 
     private Point askPoint() {
-        return new Point(askCoordinate("X") - 1, askCoordinate("Y") - 1);
-    }
-
-    private int askCoordinate(final String coordinateName) {
-        System.out.format("Please input %s:", coordinateName);
-        final Scanner in = new Scanner(System.in);
-        try {
-            return in.nextInt();
-        } catch (final InputMismatchException e) {
-            System.out.println("0_0 olololo!!!!!");
-            return askCoordinate(coordinateName);
-        }
+        return new Point(coordinateReader.askCoordinate("X") - 1, coordinateReader.askCoordinate("Y") - 1);
     }
 
     private void printLine(final Field field,
