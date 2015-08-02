@@ -9,7 +9,7 @@ import io.hexlet.xo.model.exceptions.InvalidPointException;
 public class WinnerController {
 
     public Figure getWinner(final Field field) {
-        int fieldSize = field.getSize();
+        final int fieldSize = field.getSize();
         try {
             for (int i = 0; i < fieldSize; i++)
                 if (check(field, new Point(i, 0), p -> new Point(p.getX(), p.getY() + 1)))
