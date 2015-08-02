@@ -1,6 +1,7 @@
 package io.hexlet.xo.view;
 
 
+import io.hexlet.xo.common.IXOProperty;
 import io.hexlet.xo.controllers.CurrentMoveController;
 import io.hexlet.xo.controllers.MoveController;
 import io.hexlet.xo.controllers.WinnerController;
@@ -15,6 +16,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleView {
+
+    private static final Character separator = IXOProperty.getDefaultProperties().getSeparatorCharacter();
 
     private final CurrentMoveController currentMoveController = new CurrentMoveController();
 
