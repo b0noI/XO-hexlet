@@ -51,7 +51,7 @@ public class WinnerControllerTest {
     @Test
     public void testGetWinnerWhenWinnerCustomRow() throws Exception {
         final WinnerController winnerController = new WinnerController();
-        int fieldSize = new Random().nextInt(50);
+        final int fieldSize = new Random().nextInt(50);
         for (int i = 0; i < fieldSize; i++) {
             final Field field = new Field(fieldSize);
             for (int j=0 ; j<fieldSize; j++) {
@@ -64,7 +64,7 @@ public class WinnerControllerTest {
     @Test
     public void testGetWinnerWhenNoWinnerCustomRow() throws Exception {
         final WinnerController winnerController = new WinnerController();
-        int fieldSize = new Random().nextInt(50);
+        final int fieldSize = new Random().nextInt(50);
         for (int i = 0; i < fieldSize; i++) {
             final Field field = new Field(fieldSize);
             field.setFigure(new Point(i, 0), Figure.O);
@@ -102,7 +102,7 @@ public class WinnerControllerTest {
     @Test
     public void testGetWinnerWhenWinnerCustomColumn() throws Exception {
         final WinnerController winnerController = new WinnerController();
-        int fieldSize = new Random().nextInt(50);
+        final int fieldSize = new Random().nextInt(50);
         for (int i = 0; i < fieldSize; i++) {
             final Field field = new Field(fieldSize);
             for (int j=0 ; j<fieldSize; j++) {
@@ -191,7 +191,7 @@ public class WinnerControllerTest {
     @Test
     public void testGetWinnerWhenWinnerCustomDiag2() throws Exception {
         final WinnerController winnerController = new WinnerController();
-        int fieldSize = new Random().nextInt(50);
+        final int fieldSize = new Random().nextInt(50);
         final Field field = new Field(fieldSize);
         for (int j=0 ; j<fieldSize ; j++){
             field.setFigure(new Point(fieldSize-1-j, j), Figure.X);
@@ -202,7 +202,7 @@ public class WinnerControllerTest {
     @Test
     public void testGetWinnerWhenNoWinnercustomDiag2() throws Exception {
         final WinnerController winnerController = new WinnerController();
-        int fieldSize = new Random().nextInt(50);
+        final int fieldSize = new Random().nextInt(50);
         final Field field = new Field(fieldSize);
         field.setFigure(new Point(0, 0), Figure.O);
         for (int j=1 ; j<fieldSize ; j++){
