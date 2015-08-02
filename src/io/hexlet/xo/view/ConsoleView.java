@@ -31,7 +31,7 @@ public class ConsoleView {
         for (int x = 0; x < field.getSize(); x++) {
             if (x != 0)
                 printSeparator();
-            printLine(field, x);
+            System.out.println(generateLine(field, x));
         }
     }
 
@@ -72,12 +72,10 @@ public class ConsoleView {
         }
     }
 
-    private void printLine(final Field field,
-                           final int x) {
+    private String generateLine(final Field field,
+                                final int x) {
+        String resultLine = "";
         for (int y = 0; y < field.getSize(); y++) {
-            if (y != 0)
-                System.out.print("|");
-            System.out.print(" ");
             final Figure figure;
             try {
                 figure = field.getFigure(new Point(y, x));
@@ -85,10 +83,12 @@ public class ConsoleView {
                 e.printStackTrace();
                 throw new RuntimeException(e);
             }
-            System.out.print(figure != null ? figure : " ");
-            System.out.print(" ");
+            String leftFigureWall = (y != 0 ? "|" : "");
+            String figureSymbol = String.format("%s", figure != null ? figure : " ");
+            String figureCell = String.format("%s%2s ", leftFigureWall, figureSymbol);
+            resultLine = resultLine.concat(figureCell);
         }
-        System.out.println();
+        return resultLine;
     }
 
     private void printSeparator() {
