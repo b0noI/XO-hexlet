@@ -29,10 +29,10 @@ public class ConsoleView {
     public void show(final Game game) {
         System.out.format("Game name: %s\n", game.getName());
         final Field field = game.getField();
-        for (int x = 0; x < field.getSize(); x++) {
-            if (x != 0)
+        for (int y = 0; y < field.getSize(); y++) {
+            if (y != 0)
                 printSeparator();
-            System.out.println(generateLine(field, x));
+            System.out.println(generateLine(field, y));
         }
     }
 
@@ -62,22 +62,26 @@ public class ConsoleView {
         return new Point(coordinateReader.askCoordinate("X") - 1, coordinateReader.askCoordinate("Y") - 1);
     }
 
-    private String generateLine(final Field field,
-                                final int x) {
+    protected String generateLine(final Field field,
+                                final int y) {
         String resultLine = "";
-        for (int y = 0; y < field.getSize(); y++) {
-            final Figure figure;
-            try {
-                figure = field.getFigure(new Point(y, x));
-            } catch (final InvalidPointException e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
+        try {
+            for (int x = 0; x < field.getSize(); x++) {
+                Figure figure = null;
+                try {
+                    figure = field.getFigure(new Point(x, y));
+                } catch (final InvalidPointException e) {
+                    e.printStackTrace();
+                }
+                String leftFigureWall = (x != 0 ? "|" : "");
+                String figureSymbol = String.format("%s", figure != null ? figure : " ");
+                String figureCell = String.format("%s%2s ", leftFigureWall, figureSymbol);
+                resultLine = resultLine.concat(figureCell);
             }
-            String leftFigureWall = (y != 0 ? "|" : "");
-            String figureSymbol = String.format("%s", figure != null ? figure : " ");
-            String figureCell = String.format("%s%2s ", leftFigureWall, figureSymbol);
-            resultLine = resultLine.concat(figureCell);
+        } catch (NullPointerException e){
+            e.printStackTrace();
         }
+
         return resultLine;
     }
 
