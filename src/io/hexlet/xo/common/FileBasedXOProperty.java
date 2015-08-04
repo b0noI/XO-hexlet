@@ -1,5 +1,7 @@
 package io.hexlet.xo.common;
 
+import io.hexlet.xo.model.exceptions.XOCriticalException;
+
 import java.io.*;
 import java.util.Properties;
 
@@ -18,6 +20,7 @@ class FileBasedXOProperty implements IXOProperty {
             properties.load(is);
         } catch (final NullPointerException e){
             e.printStackTrace();
+            throw new XOCriticalException(e);
         }
         return new FileBasedXOProperty(properties);
     }
