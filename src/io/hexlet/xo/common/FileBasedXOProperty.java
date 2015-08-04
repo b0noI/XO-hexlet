@@ -14,7 +14,11 @@ class FileBasedXOProperty implements IXOProperty {
     public static IXOProperty generateInstance() throws IOException {
         final Properties properties = new Properties();
         final InputStream is = FileBasedXOProperty.class.getResourceAsStream(PROPERTY_FILE);
-        properties.load(is);
+        try {
+            properties.load(is);
+        } catch (final NullPointerException e){
+            e.printStackTrace();
+        }
         return new FileBasedXOProperty(properties);
     }
 
