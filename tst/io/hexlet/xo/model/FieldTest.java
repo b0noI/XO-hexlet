@@ -1,9 +1,11 @@
 package io.hexlet.xo.model;
 
+import io.hexlet.xo.model.exceptions.InvalidBoardSizeException;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 import org.junit.Test;
 
 import java.awt.*;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -83,4 +85,23 @@ public class FieldTest {
         } catch (final InvalidPointException e) {}
     }
 
+    @Test
+    public void testCustomField() throws Exception {
+        final int defaultBoardSize = 3;
+        Random randomGenerator = new Random();
+        for (int i = 100 ; i>0 ; i--) {
+            final int fieldSize = randomGenerator.nextInt(50) + defaultBoardSize;
+            final Field field = new Field(fieldSize);
+            assertEquals(fieldSize, field.getSize());
+        }
+    }
+
+    @Test(expected=InvalidBoardSizeException.class)
+    public void testCustomFieldError() throws Exception {
+        Random randomGenerator = new Random();
+        for (int i = 100 ; i>0 ; i--) {
+            final int fieldSize = randomGenerator.nextInt(50) - 50;
+            final Field field = new Field(fieldSize);
+        }
+    }
 }
