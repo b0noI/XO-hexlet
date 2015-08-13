@@ -1,7 +1,5 @@
 package io.hexlet.xo.common;
 
-import io.hexlet.xo.model.exceptions.XOCriticalException;
-
 import java.io.*;
 import java.util.Properties;
 
@@ -15,12 +13,10 @@ class FileBasedXOProperty implements IXOProperty {
 
     public static IXOProperty generateInstance() throws IOException {
         final Properties properties = new Properties();
-        final InputStream is = FileBasedXOProperty.class.getResourceAsStream(PROPERTY_FILE);
-        try {
+        try (final InputStream is = FileBasedXOProperty.class.getResourceAsStream(PROPERTY_FILE)) {
             properties.load(is);
-        } catch (final NullPointerException e){
-            e.printStackTrace();
-            throw new XOCriticalException(e);
+        } catch (IOException ex) {
+            System.out.println(String.format("Something wrong with file: %s! Please, check!", PROPERTY_FILE));
         }
         return new FileBasedXOProperty(properties);
     }
