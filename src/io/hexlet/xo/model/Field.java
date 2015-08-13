@@ -1,6 +1,7 @@
 package io.hexlet.xo.model;
 
 
+import io.hexlet.xo.model.exceptions.InvalidBoardSizeException;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 
 
@@ -8,17 +9,25 @@ public class Field {
 
     private static final int MIN_COORDINATE = 0;
 
+    private static final int MIN_SIZE = 3;
+
     private final Figure[][] field;
 
-    private final int filedSize;
+    private final int fieldSize;
 
-    public Field(final int filedSize) {
-        this.filedSize = filedSize;
-        field = new Figure[filedSize][filedSize];
+    public Field(final int fieldSize) throws InvalidBoardSizeException {
+        if (fieldSize < MIN_SIZE ) {
+            throw new InvalidBoardSizeException();
+        }
+        else {
+        this.fieldSize = fieldSize;
+        field = new Figure[fieldSize][fieldSize];
+        }
     }
 
+
     public int getSize() {
-        return filedSize;
+        return fieldSize;
     }
 
     public Figure getFigure(final Point point) throws InvalidPointException {
