@@ -50,6 +50,7 @@ public class ConsoleView {
         }
         System.out.format("Please enter move point for: %s\n", currentFigure);
         final Point point = askPoint();
+        CLIHelper.cleanScreen();
         try {
             moveController.applyFigure(field, point, currentFigure);
         } catch (final InvalidPointException | AlreadyOccupiedException e) {
