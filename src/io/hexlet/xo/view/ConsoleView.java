@@ -26,12 +26,14 @@ public class ConsoleView {
 
     private final ConsoleCoordinateReader coordinateReader = new ConsoleCoordinateReader();
 
+    private final int SEPARATOR_LENGTH = 11;
+
     public void show(final Game game) {
         System.out.format("Game name: %s\n", game.getName());
         final Field field = game.getField();
         for (int y = 0; y < field.getSize(); y++) {
             if (y != 0)
-                printSeparator();
+                System.out.println(generateSeparator(separator, SEPARATOR_LENGTH));
             System.out.println(generateLine(field, y));
         }
     }
@@ -85,8 +87,12 @@ public class ConsoleView {
         return resultLine;
     }
 
-    private void printSeparator() {
-        System.out.println("~~~~~~~~~~~");
+    private String generateSeparator(final Character piece, final int count){
+        String result = "";
+        for (int i = 0; i < count; i++){
+            result = result + piece;
+        }
+        return result;
     }
 
 }
