@@ -5,10 +5,7 @@ import io.hexlet.xo.common.IXOProperty;
 import io.hexlet.xo.controllers.CurrentMoveController;
 import io.hexlet.xo.controllers.MoveController;
 import io.hexlet.xo.controllers.WinnerController;
-import io.hexlet.xo.model.Field;
-import io.hexlet.xo.model.Figure;
-import io.hexlet.xo.model.Game;
-import io.hexlet.xo.model.Point;
+import io.hexlet.xo.model.*;
 import io.hexlet.xo.model.exceptions.AlreadyOccupiedException;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 import io.hexlet.xo.view.reader.ConsoleCoordinateReader;
@@ -26,13 +23,43 @@ public class ConsoleView {
 
     private final ConsoleCoordinateReader coordinateReader = new ConsoleCoordinateReader();
 
+    private final int SEPARATOR_LENGTH = 11;
+
+    private final int INDENT_LENGTH = 50;
+
+    private final int HALF_INDENT_LENGTH = INDENT_LENGTH / 2;
+
+    private final String HYPHEN_VIEW = " -- ";
+
     public void show(final Game game) {
-        System.out.format("Game name: %s\n", game.getName());
+        final Player player1 = game.getPlayers()[0];
+        final Player player2 = game.getPlayers()[1];
+
+        System.out.format("%" + INDENT_LENGTH + "s\n", "Game name:" + game.getName());
+
+        // Don't try understand code below. Really          | This monster created by BK, who will never again design UI
+        System.out.format("%"
+                + (HALF_INDENT_LENGTH
+                - SEPARATOR_LENGTH
+                + player2.getName().length()
+                + HYPHEN_VIEW.length()
+                + player2.getFigure().toString().length())
+                + "s %"
+                + (HALF_INDENT_LENGTH
+                + SEPARATOR_LENGTH
+                + HALF_INDENT_LENGTH
+                - player2.getName().length()
+                - HYPHEN_VIEW.length()
+                - player2.getFigure().toString().length())
+                + "s",
+                player1.getName() + HYPHEN_VIEW + player1.getFigure(),
+                player2.getName() + HYPHEN_VIEW + player2.getFigure() + "\n");
+
         final Field field = game.getField();
         for (int y = 0; y < field.getSize(); y++) {
             if (y != 0)
-                printSeparator();
-            System.out.println(generateLine(field, y));
+                System.out.format("%" + INDENT_LENGTH + "s\n", generateSeparator(separator, SEPARATOR_LENGTH));
+            System.out.format("%" + INDENT_LENGTH + "s\n", generateLine(field, y));
         }
     }
 
@@ -85,8 +112,12 @@ public class ConsoleView {
         return resultLine;
     }
 
-    private void printSeparator() {
-        System.out.println("~~~~~~~~~~~");
+    private String generateSeparator(final Character piece, final int count){
+        String result = "";
+        for (int i = 0; i < count; i++){
+            result = result + piece;
+        }
+        return result;
     }
 
 }
