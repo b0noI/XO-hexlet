@@ -6,7 +6,6 @@ import com.googlecode.lanterna.terminal.*;
 
 public class LanternaView {
 
-
     private static final Screen screen = TerminalFacade.createScreen();
 
     public static void uiStart(){
