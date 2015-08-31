@@ -37,7 +37,6 @@ public class ConsoleView {
 
         System.out.format("%" + INDENT_LENGTH + "s\n", "Game name:" + game.getName());
 
-        // Don't try understand code below. Really          | This monster created by BK, who will never again design UI
         System.out.format("%"
                 + (HALF_INDENT_LENGTH
                 - SEPARATOR_LENGTH
