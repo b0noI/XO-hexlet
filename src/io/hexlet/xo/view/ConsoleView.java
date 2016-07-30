@@ -25,9 +25,9 @@ public class ConsoleView {
 
     private final MoveController moveController = new MoveController();
 
-    public void show(final Game game) {
+    public void show(final Game<Figure> game) {
         System.out.format("Game name: %s\n", game.getName());
-        final Field field = game.getField();
+        final Field<Figure> field = game.getField();
         for (int x = 0; x < field.getSize(); x++) {
             if (x != 0)
                 printSeparator();
@@ -35,8 +35,8 @@ public class ConsoleView {
         }
     }
 
-    public boolean move(final Game game) {
-        final Field field = game.getField();
+    public boolean move(final Game<Figure> game) {
+        final Field<Figure> field = game.getField();
         final Figure winner = winnerController.getWinner(field);
         if (winner != null) {
             System.out.format("Winner is: %s\n", winner);
@@ -72,7 +72,7 @@ public class ConsoleView {
         }
     }
 
-    private void printLine(final Field field,
+    private void printLine(final Field<Figure> field,
                            final int x) {
         for (int y = 0; y < field.getSize(); y++) {
             if (y != 0)

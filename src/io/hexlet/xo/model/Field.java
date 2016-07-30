@@ -4,31 +4,31 @@ package io.hexlet.xo.model;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 
 
-public class Field {
+public class Field<T> {
 
     private static final int MIN_COORDINATE = 0;
 
-    private final Figure[][] field;
+    private final T[][] field;
 
     private final int filedSize;
 
     public Field(final int filedSize) {
         this.filedSize = filedSize;
-        field = new Figure[filedSize][filedSize];
+        field = (T[][])new Object[filedSize][filedSize];
     }
 
     public int getSize() {
         return filedSize;
     }
 
-    public Figure getFigure(final Point point) throws InvalidPointException {
+    public T getFigure(final Point point) throws InvalidPointException {
         if (!checkPoint(point)) {
             throw new InvalidPointException();
         }
         return field[point.getX()][point.getY()];
     }
 
-    public void setFigure(final Point point, final Figure figure) throws InvalidPointException {
+    public void setFigure(final Point point, final T figure) throws InvalidPointException {
         if (!checkPoint(point)) {
             throw new InvalidPointException();
         }
@@ -41,6 +41,13 @@ public class Field {
 
     private boolean checkCoordinate(final int coordinate, final int maxCoordinate) {
         return coordinate >= MIN_COORDINATE && coordinate < maxCoordinate;
+    }
+
+    public static void main(String[] args) throws InvalidPointException {
+        Field<Figure> xoField = new Field<>(3);
+        xoField.setFigure(new Point(1, 1), Figure.O);
+        Field<String> chField = new Field<>(8);
+        chField.setFigure(new Point(2, 2), "figure1");
     }
 
 }
